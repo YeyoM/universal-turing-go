@@ -1,0 +1,54 @@
+The syntax for the input turing machine is the following...
+
+The program will run a Turing machine that is read from a file passed by the user,
+and will simulate the machine on the input string passed by the user.
+
+There are going to be some specific flags that the user can pass to the program to
+change the behavior of the program.
+
+Possible Flags:
+
+  --help, -h: Display the help message.
+  --verbose, -v: Display the tape and the current state of the machine at each step.
+  --step, -s: Display the tape and the current state of the machine at each step, and wait for the user to press enter to continue.
+  --input, -i: Specify the input string for the machine. If not specified, the user will be prompted to enter the input string.
+  --file, -f: Specify the file containing the Turing machine. If not specified, the user will be prompted to enter the file name.
+
+The input file should contain a turing machine with the correct syntax. The syntax is the following...
+
+Syntax:
+
+  Each line should contain one tuple of the form '<current state> <current symbol> <new symbol> <direction> <new state>'.
+  You can use any number or word for <current state> and <new state>, eg. 10, a, state1. State labels are case-sensitive.
+  You can use almost any character for <current symbol> and <new symbol>, or '_' to represent blank (space). Symbols are case-sensitive.
+  You can't use ';', '*', '_' or whitespace as symbols.
+  <direction> should be 'l', 'r' or '*', denoting 'move left', 'move right' or 'do not move', respectively.
+  Anything after a ';' is a comment and is ignored.
+  The machine halts when it reaches any state starting with 'halt', eg. halt, halt-accept.
+
+Also:
+
+  '*' can be used as a wildcard in <current symbol> or <current state> to match any character or state.
+  '*' can be used in <new symbol> or <new state> to mean 'no change'.
+
+
+Ideas on how we can make this work
+
+1. Read the file (and check if the syntax is correct, if not, throw an error) and store the tuples in a list.
+2. Create a dictionary with the tuples as keys and the values as the new symbol, direction and new state.
+3. Create a doubly linked list to represent the tape. 
+4. Initialize the tape with the input string. (in case the syntax is wrong, throw an error)
+
+Functions needed:
+
+1. read_file(file_name): Reads the file and returns a list of tuples.
+2. check_syntax(tuples): Checks if the syntax of the tuples is correct.
+3. create_dict(tuples): Creates a dictionary with the tuples as keys and the values as the new symbol, direction and new state.
+
+4. initialize_tape(input_string): Initializes the tape with the input string.
+5. run_machine(tape, dictionary): Runs the machine on the tape using the dictionary.
+
+6. display_tape(tape): Displays the tape.
+7. display_state(state): Displays the current state of the machine.
+
+8. main(): Main function that calls all the other functions.
